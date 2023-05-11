@@ -1,0 +1,78 @@
+<div class="container ">
+    <div class="row">
+        <div class="col">
+            <h1> All Contacts Page
+                <a  class="btn btn-success ms-5" routerLink="add-contact">
+                    <i class="fa-solid fa-user-plus"></i>Add New</a>
+            </h1>
+            <!-- content -->
+            <p style="text-align: justify;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem tempora rem modi rerum quasi molestiae alias, incidunt facere sapiente debitis vel, numquam tenetur accusamus, quas quibusdam maiores obcaecati maxime ratione. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ullam dignissimos aspernatur quisquam saepe reiciendis enim aliquid exercitationem, quaerat, molestiae distinctio iure rem perspiciatis in aliquam? Esse voluptatibus eum unde. Esse!
+            </p>
+            <!-- search  option-->
+            <div class="container row mt-5">
+                <div class="col-lg-2 fw-bolder">
+                    Search Contact:
+                </div>
+                <div class="col-lg-6">
+                    <!-- input search box -->
+                    <input [(ngModel)]="searchKey" placeholder="Type Contact Here !!!!" type="text" class="form-control me-auto">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- loading spinner -->
+<div *ngIf="isLoading && allContacts.length==0" class="text-center mt-5">
+    <!-- spinner bootstrap code -->
+    <div class="spinner-border text-info" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+</div>
+
+<!-- If no contact match to the  input feild -->
+
+<div *ngIf="(allContacts | filter : searchKey : 'name').length==0 && !isLoading">
+<h3 style="text-align: center; margin-top: 20px;">No Contacts Found</h3>
+</div>
+    
+<!-- Error message -->
+<div *ngIf="errorMsg" class="alert alert-danger m-5" role="alert">
+    {{errorMsg}}
+</div>
+
+<!-- contact card design -->
+<div class="container mt-5">
+    <div *ngIf="!isLoading && allContacts.length>0" class="row">
+        <div class="col-lg-6 mb-3" *ngFor="let contact of allContacts | filter : searchKey:'name' ">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col-sm-3 text-center">
+                            <!-- image -->
+                            <img width="100px" height="100px" [src]="contact.photo" alt="user-image">
+                        </div>
+                        <div class="col-sm-8">
+                            <!-- content -->
+                            <ul class="list-group">
+                                <li class="list-group-item">Name: <span class="fw-bold">{{contact.name}}</span></li>
+                                <li class="list-group-item">Mobile: <span class="fw-bold">{{contact.mobile}}</span></li>
+                                <li class="list-group-item">Email: <span class="fw-bold">{{contact.email}}
+                                </span></li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-1 d-flex flex-column justify-content-center align-items-center">
+                            <!-- actions -->
+                            <!-- view -->
+                            <a class="btn btn-warning text-light mb-1" routerLink="view-contact/{{contact.id}}"> <i class="fa-solid fa-eye"></i></a>
+                            <!-- edit -->
+                            <a class="btn btn-success text-light mb-1" routerLink="edit-contact/{{contact.id}}"> <i class="fa-solid fa-pen"></i></a>
+                            <!-- delete -->
+                            <button (click)="deleteContact(contact.id)" class="btn btn-danger text-light" > <i class="fa-solid fa-trash"></i></button>    
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

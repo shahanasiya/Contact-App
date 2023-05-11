@@ -1,0 +1,24 @@
+
+
+
+                        Contact Management App - workflow
+
+
+1. create angular projrct
+2. clean the code
+3. run project
+4. link all external library: bootstrap,font awesome,font
+5. create components:
+    - header
+    - footer
+    - all-contacts
+    - add-contact
+    - view-contact
+    - edit-contact
+6. delete all spec.ts file from each userdefined components
+7. Setup path for each components
+    - all-contacts : path:http://localhost:4200/
+    - add-contact :  path:http://localhost:4200/add-contact
+    - view-contact:  path:http://localhost:4200/view-contact/id
+    - edit-contact: path:http://localhost:4200/edit-contact/id
+8. To navigate according to component use router-oulet
